@@ -99,6 +99,7 @@
     <Content Include="Scripts\app\security\services\authInterceptorService.js" />
     <Content Include="Scripts\app\security\services\authService.js" />
     <Content Include="Scripts\app\security\services\tokensManagerService.js" />
+    <Content Include="Scripts\app\views\about.html" />
     <Content Include="Scripts\app\views\clients.html" />
     <Content Include="Scripts\app\views\home.html" />
     <Content Include="Scripts\app\views\login.html" />
