@@ -1,6 +1,7 @@
 ﻿using Microsoft.Owin;
 using Microsoft.Owin.Security.OAuth;
 using Owin;
+using RestServerApi.App_Start;
 using RestServerApi.Formats;
 using RestServerApi.Providers;
 using System;
@@ -17,8 +18,13 @@ namespace RestServerApi
             // Web API routes
             config.MapHttpAttributeRoutes();
 
-            ConfigureOAuth(app);
+            //var cors = new EnableCorsAttribute("*", "*", "*");
+            //config.EnableCors(cors);
+            //config.MessageHandlers.Add(new PreflightRequestsHandler());
 
+            //WebApiConfig.Register(config);
+
+            ConfigureOAuth(app);
             app.UseCors(Microsoft.Owin.Cors.CorsOptions.AllowAll);
 
             app.UseWebApi(config);
