@@ -57,6 +57,7 @@ namespace RestServerApi
             var secret = TextEncodings.Base64Url.Decode("IxrAjDoa2FqElO7IhrSrUJELhUckePEPVpaePlS_Xaw");
 
             // Api controllers with an [Authorize] attribute will be validated with JWT
+            //https://github.com/Xela101/EasyJwtAuth
             app.UseJwtBearerAuthentication(
                 new JwtBearerAuthenticationOptions
                 {
