@@ -7,12 +7,12 @@
             <div class="login">
                 <div class="row">
                     <div class="col-md-2">
-                        Email:
+                        User Name:
                     </div>
                     <div class="col-md-10">
-                        <input type="email" name="email" class="form-control" data-ng-model="vm.email" required />
-                        <span class="errorMessage" ng-show="loginForm.email.$touched && loginForm.email.$invalid">
-                            Email is required
+                        <input type="text" name="userName" class="form-control" data-ng-model="loginData.userName" required />
+                        <span class="errorMessage" ng-show="loginForm.userName.$touched && loginForm.userName.$invalid">
+                            User Name is required
                         </span>
                     </div>
                 </div>
@@ -23,7 +23,7 @@
                     </div>
                     <div class="col-md-10">
                         <input type="password" name="password" class="form-control"
-                               data-ng-model="vm.password"
+                               data-ng-model="loginData.password"
                                data-ng-minlength="6"
                                required />
                         <span class="errorMessage" ng-show="loginForm.password.$touched && loginForm.password.$invalid">
@@ -35,7 +35,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <button type="submit" class="btn btn-primary"
-                                data-ng-click="vm.login()"
+                                data-ng-click="login()"
                                 ng-disabled="loginForm.$invalid || !loginForm.$dirty">
                             Login
                         </button>
@@ -44,7 +44,7 @@
                 <br />
                 <div class="statusRow">
                     <br />
-                    <div class="label label-important" data-ng-show="vm.errorMessage">
+                    <div class="label label-important" data-ng-show="errorMessage">
                         <span class="glyphicon glyphicon-thumbs-down icon-white"></span>&nbsp;&nbsp;Error: {{ errorMessage }}
                     </div>
                 </div>

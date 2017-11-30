@@ -44,7 +44,7 @@ app.config(function ($routeProvider) {
 var serviceBase = 'http://localhost:59598/';
 app.constant('ngAuthSettings', {
     apiServiceBaseUri: serviceBase,
-    clientId: 'ngAuthApp'
+    clientId: 'IAmTheFirstClient'
 });
 
 app.config(function ($httpProvider) {
