@@ -95,6 +95,7 @@
     <Content Include="Scripts\app\client\services\clientsService.js" />
     <Content Include="Scripts\app\navbarController.js" />
     <Content Include="Scripts\app\security\controllers\aboutController.js" />
+    <Content Include="Scripts\app\security\controllers\loginController.js" />
     <Content Include="Scripts\app\security\services\authInterceptorService.js" />
     <Content Include="Scripts\app\security\services\authService.js" />
     <Content Include="Scripts\app\security\services\tokensManagerService.js" />
