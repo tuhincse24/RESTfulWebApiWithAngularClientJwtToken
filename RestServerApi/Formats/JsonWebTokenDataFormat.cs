@@ -4,7 +4,11 @@ using Microsoft.Owin.Security.DataHandler.Encoder;
 using RestServerApi.Entities;
 using RestServerApi.InMemoryDataStores;
 using System;
+using System.Collections.Generic;
+using System.Globalization;
 using System.IdentityModel.Tokens.Jwt;
+using System.Linq;
+using System.Security.Claims;
 //using Thinktecture.IdentityModel.Tokens;
 
 namespace RestServerApi.Formats
@@ -57,7 +61,46 @@ namespace RestServerApi.Formats
 
         public AuthenticationTicket Unprotect(string protectedText)
         {
-            throw new NotImplementedException();
+            var issuer = "http://www.RestServerApi.com.bd";
+            var audience = "IAmTheFirstClient";
+            var secret = TextEncodings.Base64Url.Decode("IxrAjDoa2FqElO7IhrSrUJELhUckePEPVpaePlS_Xaw");
+            if (string.IsNullOrWhiteSpace(protectedText))
+            {
+                throw new ArgumentNullException("protectedText");
+            }
+
+            var handler = new JwtSecurityTokenHandler();
+            var token = handler.ReadToken(protectedText) as JwtSecurityToken;
+
+            if (token == null)
+            {
+                throw new ArgumentOutOfRangeException("protectedText", "Invalid JWT Token");
+            }
+
+            var validationParameters = new TokenValidationParameters { IssuerSigningKey = new SymmetricSecurityKey(secret), ValidAudiences = new[] { audience }, ValidateIssuer = true, ValidIssuer = this._issuer, ValidateLifetime = true, ValidateAudience = true, ValidateIssuerSigningKey = true };
+
+            var tokenHandler = new JwtSecurityTokenHandler();
+            SecurityToken validatedToken = null;
+
+            ClaimsPrincipal claimsPrincipal = tokenHandler.ValidateToken(protectedText, validationParameters, out validatedToken);
+            var claimsIdentity = (ClaimsIdentity)claimsPrincipal.Identity;
+
+            var authenticationExtra = new AuthenticationProperties(new Dictionary<string, string>());
+            //if (claimsIdentity.Claims.Any(c => c.Type == ExpiryClaimName))
+            //{
+            //    string expiryClaim = (from c in claimsIdentity.Claims where c.Type == ExpiryClaimName select c.Value).Single();
+            //    authenticationExtra.ExpiresUtc = _epoch.AddSeconds(Convert.ToInt64(expiryClaim, CultureInfo.InvariantCulture));
+            //}
+
+            //if (claimsIdentity.Claims.Any(c => c.Type == IssuedAtClaimName))
+            //{
+            //    string issued = (from c in claimsIdentity.Claims where c.Type == IssuedAtClaimName select c.Value).Single();
+            //    authenticationExtra.IssuedUtc = _epoch.AddSeconds(Convert.ToInt64(issued, CultureInfo.InvariantCulture));
+            //}
+
+            var returnedIdentity = new ClaimsIdentity(claimsIdentity.Claims, "JWT");
+
+            return new AuthenticationTicket(returnedIdentity, authenticationExtra);
         }
     }
 }

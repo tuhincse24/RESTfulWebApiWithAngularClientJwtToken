@@ -17,7 +17,7 @@ namespace RestServerApi.InMemoryDataStores
                                 {
                                     ClientId = "IAmTheFirstClient",
                                     Base64Secret = "IxrAjDoa2FqElO7IhrSrUJELhUckePEPVpaePlS_Xaw",
-                                    Name = "Resource Server url here"
+                                    Name = "http://www.RestServerApi.com.bd"
                                 });
         }
 
