@@ -5,11 +5,8 @@ using RestServerApi.Entities;
 using RestServerApi.InMemoryDataStores;
 using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
 using System.Security.Claims;
-//using Thinktecture.IdentityModel.Tokens;
 
 namespace RestServerApi.Formats
 {
@@ -40,10 +37,6 @@ namespace RestServerApi.Formats
             string symmetricKeyAsBase64 = audience.Base64Secret;
 
             var keyByteArray = TextEncodings.Base64Url.Decode(symmetricKeyAsBase64);
-
-            //var signingKey = new HmacSigningCredentials(keyByteArray);
-
-            //const string sec = "401b09eab3c013d4ca54922bb802bec8fd5318192b0a75f201d8b3727429090fb337591abd3e44453b954555b7a0812e1081c39b740293f765eae731f5a65ed1";
             var securityKey = new SymmetricSecurityKey(TextEncodings.Base64Url.Decode(symmetricKeyAsBase64));
             var signingCredentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
 
@@ -61,7 +54,6 @@ namespace RestServerApi.Formats
 
         public AuthenticationTicket Unprotect(string protectedText)
         {
-            var issuer = "http://www.RestServerApi.com.bd";
             var audience = "IAmTheFirstClient";
             var secret = TextEncodings.Base64Url.Decode("IxrAjDoa2FqElO7IhrSrUJELhUckePEPVpaePlS_Xaw");
             if (string.IsNullOrWhiteSpace(protectedText))
@@ -77,7 +69,7 @@ namespace RestServerApi.Formats
                 throw new ArgumentOutOfRangeException("protectedText", "Invalid JWT Token");
             }
 
-            var validationParameters = new TokenValidationParameters { IssuerSigningKey = new SymmetricSecurityKey(secret), ValidAudiences = new[] { audience }, ValidateIssuer = true, ValidIssuer = this._issuer, ValidateLifetime = true, ValidateAudience = true, ValidateIssuerSigningKey = true };
+            var validationParameters = new TokenValidationParameters { IssuerSigningKey = new SymmetricSecurityKey(secret), ValidateAudience = true, ValidAudiences = new[] { audience }, ValidateIssuer = true, ValidIssuer = this._issuer, ValidateLifetime = true, ValidateIssuerSigningKey = true };
 
             var tokenHandler = new JwtSecurityTokenHandler();
             SecurityToken validatedToken = null;
@@ -86,17 +78,6 @@ namespace RestServerApi.Formats
             var claimsIdentity = (ClaimsIdentity)claimsPrincipal.Identity;
 
             var authenticationExtra = new AuthenticationProperties(new Dictionary<string, string>());
-            //if (claimsIdentity.Claims.Any(c => c.Type == ExpiryClaimName))
-            //{
-            //    string expiryClaim = (from c in claimsIdentity.Claims where c.Type == ExpiryClaimName select c.Value).Single();
-            //    authenticationExtra.ExpiresUtc = _epoch.AddSeconds(Convert.ToInt64(expiryClaim, CultureInfo.InvariantCulture));
-            //}
-
-            //if (claimsIdentity.Claims.Any(c => c.Type == IssuedAtClaimName))
-            //{
-            //    string issued = (from c in claimsIdentity.Claims where c.Type == IssuedAtClaimName select c.Value).Single();
-            //    authenticationExtra.IssuedUtc = _epoch.AddSeconds(Convert.ToInt64(issued, CultureInfo.InvariantCulture));
-            //}
 
             var returnedIdentity = new ClaimsIdentity(claimsIdentity.Claims, "JWT");
 

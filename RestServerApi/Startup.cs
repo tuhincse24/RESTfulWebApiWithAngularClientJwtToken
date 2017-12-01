@@ -4,7 +4,6 @@ using Microsoft.Owin.Security.DataHandler.Encoder;
 //using Microsoft.Owin.Security.Jwt;
 using Microsoft.Owin.Security.OAuth;
 using Owin;
-using RestServerApi.App_Start;
 using RestServerApi.Formats;
 using RestServerApi.Providers;
 using System;
