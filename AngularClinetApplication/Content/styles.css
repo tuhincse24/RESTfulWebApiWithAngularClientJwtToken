@@ -265,6 +265,11 @@ a.navbar-brand {
         .navbar .nav > li > a:focus {
             color: #563d7c
         }
+.navbar-inner,
+.navbar-inner, 
+.navbar-inner a{
+    color: white
+}
 
     .navbar .nav > li.toolbaritem > a {
         color: black;
