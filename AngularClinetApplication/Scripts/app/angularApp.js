@@ -22,16 +22,6 @@ app.config(function ($routeProvider) {
         templateUrl: "/Scripts/app/views/clients.html"
     });
 
-    $routeProvider.when("/refresh", {
-        controller: "refreshController",
-        templateUrl: "/Scripts/app/views/refresh.html"
-    });
-
-    $routeProvider.when("/tokens", {
-        controller: "tokensManagerController",
-        templateUrl: "/Scripts/app/views/tokens.html"
-    });
-
     $routeProvider.when("/about", {
         controller: "aboutController",
         templateUrl: "/Scripts/app/views/about.html"
