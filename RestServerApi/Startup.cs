@@ -45,6 +45,7 @@ namespace RestServerApi
                 TokenEndpointPath = new PathString("/security/token"),
                 AccessTokenExpireTimeSpan = TimeSpan.FromMinutes(10),
                 Provider = new CustomOAuthServerProvider(),
+                //AuthenticationType = "Bearer",
                 AccessTokenFormat = new JsonWebTokenDataFormat("http://www.RestServerApi.com.bd")
             };
 
@@ -56,26 +57,14 @@ namespace RestServerApi
             var audience = "IAmTheFirstClient";
             var secret = TextEncodings.Base64Url.Decode("IxrAjDoa2FqElO7IhrSrUJELhUckePEPVpaePlS_Xaw");
 
-            // Api controllers with an [Authorize] attribute will be validated with JWT
-            //https://github.com/Xela101/EasyJwtAuth
-            app.UseJwtBearerAuthentication(
-                new JwtBearerAuthenticationOptions
-                {
-                    AuthenticationMode = AuthenticationMode.Active,
-                    AllowedAudiences = new[] { audience },
-                    IssuerSecurityTokenProviders = new IIssuerSecurityTokenProvider[]
-                    {
-                        new SymmetricKeyIssuerSecurityTokenProvider(issuer, secret)
-                    },
-                    Provider = new OAuthBearerAuthenticationProvider
-                    {
-                        OnValidateIdentity = context =>
-                        {
-                            context.Ticket.Identity.AddClaim(new System.Security.Claims.Claim("newCustomClaim", "newValue"));
-                            return Task.FromResult<object>(null);
-                        }
-                    }
-                });
+
+            app.UseOAuthBearerAuthentication(new OAuthBearerAuthenticationOptions
+            {
+                AccessTokenFormat = new JsonWebTokenDataFormat("http://www.RestServerApi.com.bd"),
+                //AuthenticationMode = AuthenticationMode.Active,
+                //AuthenticationType = "Bearer",
+                //Description = new AuthenticationDescription()
+            });
 
         }
     }
