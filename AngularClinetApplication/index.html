@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE html>
 <html ng-app="angularApp">
 <head>
-    <title>Angular Application</title>
+    <title>Angular Client Application</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="Content/bootstrap.css" rel="stylesheet" />
@@ -25,14 +25,13 @@
                 </a>
             </div>
             <div class="nav-container" data-collapse="vm.isCollapsed">
-
-                <!-- With menu-highlighter directive -->
                 <ul class="nav navbar-nav nav-pills navBarPadding" menu-highlighter highlight-class-name="active">
                     <li><a href="#/clients">Clients</a></li>
                     <li><a href="#/about">About</a></li>
-                    <li id="nav-login" ng-click="loginOrOut()">
-                        <!-- href not used but needed to compare against path in menu-highlighter -->
-                        <a data-href="#/login">{{ loginLogoutText }}</a>
+                    <li data-ng-hide="!authentication.isAuthenticated"><a href="" data-ng-click="logOut()">Logout</a></li>
+                    <li data-ng-hide="authentication.isAuthenticated"> <a href="#/login">Login</a></li>
+                    <li data-ng-hide="authentication.isAuthenticated">
+                        <a href="#/signup">Sign up</a>
                     </li>
                 </ul>
             </div>
@@ -59,53 +58,25 @@
         </div>
     </div>
 
-    <div wc-overlay wc-overlay-delay="300">
-        <br /><img src="Content/images/spinner.gif" />&nbsp;&nbsp;Loading
-    </div>
-
     <!-- 3rd party libraries -->
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular-route.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular-animate.min.js"></script>
     <script src="Scripts/lib/angular-ui-bootstrap.js"></script>
-    <script src="Scripts/lib/tweenMax.min.js"></script>
-    <script src="Scripts/lib/wcOverlay.js"></script>
-    <script src="Scripts/lib/menuHighlighter.js"></script>
-    
-    <!-- To use breeze change the app/customersApp/services/config.js useBreeze property to true -->
-    <script src="Scripts/lib/breeze.min.js"></script>
-    <script src="Scripts/lib/breeze.angular.js"></script>
     <script src="Scripts/lib/angular-local-storage.min.js"></script>
-    <script src="Scripts/lib/loading-bar.min.js"></script>
 
     <!-- Custom scripts -->
     <script src="Scripts/app/angularApp.js"></script>
     <script src="Scripts/app/navbarController.js"></script>
     <script src="Scripts/app/security/controllers/aboutController.js"></script>
     <script src="Scripts/app/security/controllers/loginController.js"></script>
+    <script src="Scripts/app/security/controllers/signupController.js"></script>
     <script src="Scripts/app/security/services/authInterceptorService.js"></script>
     <script src="Scripts/app/security/services/authService.js"></script>
     <script src="Scripts/app/security/services/tokensManagerService.js"></script>
 
     <script src="Scripts/app/client/controllers/clientsController.js"></script>
     <script src="Scripts/app/client/services/clientsService.js"></script>
-    <!--<script src="app/customersApp/filters/nameCityStateFilter.js"></script>
-    <script src="app/customersApp/filters/nameProductFilter.js"></script>
-    <script src="app/customersApp/services/config.js"></script>
-    <script src="app/customersApp/services/authService.js"></script>
-    <script src="app/customersApp/services/httpInterceptors.js"></script>
-    <script src="app/customersApp/services/customersBreezeService.js"></script>
-    <script src="app/customersApp/services/customersService.js"></script>
-    <script src="app/customersApp/services/dataService.js"></script>
-    <script src="app/customersApp/services/modalService.js"></script>
-    <script src="app/customersApp/controllers/customers/customerEditController.js"></script>
-    <script src="app/customersApp/controllers/customers/customerOrdersController.js"></script>
-    <script src="app/customersApp/controllers/customers/customersController.js"></script>
-    <script src="app/customersApp/controllers/orders/orderChildController.js"></script>
-    <script src="app/customersApp/controllers/orders/ordersController.js"></script>
-    <script src="app/customersApp/controllers/aboutController.js"></script>
-    <script src="app/customersApp/controllers/navbarController.js"></script>
-    <script src="app/customersApp/controllers/loginController.js"></script>-->
 
 </body>
 </html>

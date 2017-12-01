@@ -1,7 +1,7 @@
 ﻿<div class="view">
     <div class="container">
         <header>
-            <h3><span class="glyphicon glyphicon-lock"></span> Login</h3>
+            <h3><span class="glyphicon glyphicon-lock"></span> Sign up</h3>
         </header>
         <form name="loginForm" novalidate>
             <div class="login">
@@ -10,7 +10,7 @@
                         User Name:
                     </div>
                     <div class="col-md-10">
-                        <input type="text" name="userName" class="form-control" data-ng-model="loginData.userName" required />
+                        <input type="text" name="userName" class="form-control" data-ng-model="registration.name" required />
                         <span class="errorMessage" ng-show="loginForm.userName.$touched && loginForm.userName.$invalid">
                             User Name is required
                         </span>
@@ -23,7 +23,7 @@
                     </div>
                     <div class="col-md-10">
                         <input type="password" name="password" class="form-control"
-                               data-ng-model="loginData.password"
+                               data-ng-model="registration.password"
                                data-ng-minlength="6"
                                required />
                         <span class="errorMessage" ng-show="loginForm.password.$touched && loginForm.password.$invalid">
@@ -33,13 +33,27 @@
                 </div>
                 <br />
                 <div class="row">
+                    <div class="col-md-2">
+                        Confirm Password:
+                    </div>
+                    <div class="col-md-10">
+                        <input type="password" name="confirmPassword" class="form-control"
+                               data-ng-model="registration.confirmPassword"
+                               data-ng-minlength="6"
+                               required />
+                        <span class="errorMessage" ng-show="loginForm.password.$touched && loginForm.password.$invalid">
+                            Confirm password is required
+                        </span>
+                    </div>
+                </div>
+                <br />
+                <div class="row">
                     <div class="col-md-12">
                         <button type="submit" class="btn btn-primary"
-                                data-ng-click="login()"
+                                data-ng-click="signUp()"
                                 ng-disabled="loginForm.$invalid || !loginForm.$dirty">
-                            Login
+                            Save
                         </button>
-                        <a href="/#/signup">Sign up</a>
                     </div>
                 </div>
                 <br />

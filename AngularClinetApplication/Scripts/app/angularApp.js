@@ -1,5 +1,5 @@
 ﻿
-var app = angular.module('angularApp', ['ngRoute', 'ui.bootstrap', 'breeze.angular', 'LocalStorageModule', 'angular-loading-bar']);
+var app = angular.module('angularApp', ['ngRoute', 'ui.bootstrap', 'LocalStorageModule']);
 
 app.config(function ($routeProvider) {
 
@@ -32,9 +32,9 @@ app.config(function ($routeProvider) {
         templateUrl: "/Scripts/app/views/tokens.html"
     });
 
-    $routeProvider.when("/associate", {
-        controller: "associateController",
-        templateUrl: "/Scripts/app/views/associate.html"
+    $routeProvider.when("/about", {
+        controller: "aboutController",
+        templateUrl: "/Scripts/app/views/about.html"
     });
 
     $routeProvider.otherwise({ redirectTo: "/home" });

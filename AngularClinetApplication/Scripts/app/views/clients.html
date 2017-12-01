@@ -24,7 +24,7 @@
                                     <td>{{client.RegionalCountry}}</td>
                                     <td>{{client.Address}}</td>
                                     <td>
-                                        <a href="#/clientprojects/{{client.Id}}" class="btn-link">
+                                        <a href="#/clients" class="btn-link">
                                             {{ client.ProjectCount }}
                                             <span data-ng-pluralize count="client.ProjectCount"
                                                   when="{'1': 'Project','other': 'Projects'}">
@@ -54,7 +54,6 @@
                      data-items-per-page="pageSize"
                      data-boundary-links="true"
                      class="pagination-sm"></div>
-                <h5>Showing {{ filteredCount }} of {{ totalRecords}} total clients</h5>
             </div>
         </div>
         <br /><br /><br />

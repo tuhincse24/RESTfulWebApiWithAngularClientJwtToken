@@ -96,6 +96,7 @@
     <Content Include="Scripts\app\navbarController.js" />
     <Content Include="Scripts\app\security\controllers\aboutController.js" />
     <Content Include="Scripts\app\security\controllers\loginController.js" />
+    <Content Include="Scripts\app\security\controllers\signupController.js" />
     <Content Include="Scripts\app\security\services\authInterceptorService.js" />
     <Content Include="Scripts\app\security\services\authService.js" />
     <Content Include="Scripts\app\security\services\tokensManagerService.js" />
@@ -103,6 +104,7 @@
     <Content Include="Scripts\app\views\clients.html" />
     <Content Include="Scripts\app\views\home.html" />
     <Content Include="Scripts\app\views\login.html" />
+    <Content Include="Scripts\app\views\signup.html" />
     <Content Include="Scripts\lib\angular-local-storage.min.js" />
     <Content Include="Scripts\lib\angular-ui-bootstrap.js" />
     <Content Include="Scripts\lib\authComplete.js" />

@@ -4,44 +4,22 @@
 
     var NavbarController = function ($scope, $location, authService) {
             $scope.appTitle = 'Client Management';
+            $scope.authentication = authService.authentication;
 
-        $scope.isCollapsed = false;
-
-        $scope.highlight = function (path) {
-            return $location.path().substr(0, path.length) === path;
-        };
-
-        $scope.loginOrOut = function () {
-            setLoginLogoutText();
-            var isAuthenticated = authService.user.isAuthenticated;
-            if (isAuthenticated) { //logout 
-                authService.logout().then(function () {
+        $scope.logOut = function () {
+                var isAuthenticated = authService.authentication.isAuthenticated;
+                if (isAuthenticated) { //logout 
+                    authService.logOut();
                     $location.path('/');
                     return;
-                });                
-            }
-            redirectToLogin();
-        };
+                }
+            };
 
-        function redirectToLogin() {
-            var path = '/login' + $location.$$path;
+        $scope.login = function () {
+            var path = '/login';
             $location.replace();
             $location.path(path);
-        }
-
-        $scope.$on('loginStatusChanged', function (loggedIn) {
-            setLoginLogoutText(loggedIn);
-        });
-
-        $scope.$on('redirectToLogin', function () {
-            redirectToLogin();
-        });
-
-        function setLoginLogoutText() {
-            $scope.loginLogoutText = (authService.authentication.isAuthenticated) ? 'Logout' : 'Login';
-        }
-
-        setLoginLogoutText();
+        };
 
     };
 
