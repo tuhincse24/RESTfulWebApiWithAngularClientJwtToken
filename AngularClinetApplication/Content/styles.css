@@ -262,6 +262,9 @@ a.navbar-brand {
         padding-top: 6px;
         padding-bottom: 0px;
     }
+        .navbar .nav > li > a:focus {
+            color: #563d7c
+        }
 
     .navbar .nav > li.toolbaritem > a {
         color: black;
