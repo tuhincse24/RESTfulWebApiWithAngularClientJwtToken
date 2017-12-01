@@ -65,6 +65,11 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\images\Dell.png" />
+    <Content Include="Content\images\MetLife.png" />
+    <Content Include="Content\images\Microsoft.png" />
+    <Content Include="Content\images\Nestle.png" />
+    <Content Include="Content\images\Walmart.png" />
     <Content Include="packages.config" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
@@ -82,12 +87,7 @@
     <Content Include="Content\animations.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.icon-large.min.css" />
-    <Content Include="Content\images\angularShield.png" />
-    <Content Include="Content\images\ColorPalette.png" />
-    <Content Include="Content\images\female.png" />
-    <Content Include="Content\images\male.png" />
     <Content Include="Content\images\people.png" />
-    <Content Include="Content\images\report.png" />
     <Content Include="Content\images\spinner.gif" />
     <Content Include="Content\styles.css" />
     <Content Include="index.html" />
