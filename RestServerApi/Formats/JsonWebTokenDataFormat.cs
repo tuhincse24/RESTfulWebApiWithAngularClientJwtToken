@@ -5,6 +5,7 @@ using RestServerApi.Entities;
 using RestServerApi.InMemoryDataStores;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 
@@ -15,10 +16,14 @@ namespace RestServerApi.Formats
         private const string AudiencePropertyKey = "audience";
 
         private readonly string _issuer = string.Empty;
+        private readonly string _client_id = string.Empty;
+        private readonly string _secretkey = string.Empty;
 
-        public JsonWebTokenDataFormat(string issuer)
+        public JsonWebTokenDataFormat()
         {
-            _issuer = issuer;
+            _issuer = ConfigurationManager.AppSettings.Get("issuer");
+            _client_id = ConfigurationManager.AppSettings.Get("client.id");
+            _secretkey = ConfigurationManager.AppSettings.Get("secretkey"); 
         }
 
         public string Protect(AuthenticationTicket data)
@@ -54,8 +59,7 @@ namespace RestServerApi.Formats
 
         public AuthenticationTicket Unprotect(string protectedText)
         {
-            var audience = "IAmTheFirstClient";
-            var secret = TextEncodings.Base64Url.Decode("IxrAjDoa2FqElO7IhrSrUJELhUckePEPVpaePlS_Xaw");
+            var secret = TextEncodings.Base64Url.Decode(_secretkey);
             if (string.IsNullOrWhiteSpace(protectedText))
             {
                 throw new ArgumentNullException("protectedText");
@@ -68,13 +72,20 @@ namespace RestServerApi.Formats
             {
                 throw new ArgumentOutOfRangeException("protectedText", "Invalid JWT Token");
             }
+            ClaimsPrincipal claimsPrincipal;
+            try
+            {
+                var validationParameters = new TokenValidationParameters { IssuerSigningKey = new SymmetricSecurityKey(secret), ValidateAudience = true, ValidAudiences = new[] { this._client_id }, ValidateIssuer = true, ValidIssuer = this._issuer, ValidateLifetime = true, ValidateIssuerSigningKey = true };
 
-            var validationParameters = new TokenValidationParameters { IssuerSigningKey = new SymmetricSecurityKey(secret), ValidateAudience = true, ValidAudiences = new[] { audience }, ValidateIssuer = true, ValidIssuer = this._issuer, ValidateLifetime = true, ValidateIssuerSigningKey = true };
+                var tokenHandler = new JwtSecurityTokenHandler();
+                SecurityToken validatedToken = null;
 
-            var tokenHandler = new JwtSecurityTokenHandler();
-            SecurityToken validatedToken = null;
-
-            ClaimsPrincipal claimsPrincipal = tokenHandler.ValidateToken(protectedText, validationParameters, out validatedToken);
+                claimsPrincipal = tokenHandler.ValidateToken(protectedText, validationParameters, out validatedToken);
+            }
+            catch (Exception)
+            {
+                return null;
+            }
             var claimsIdentity = (ClaimsIdentity)claimsPrincipal.Identity;
 
             var authenticationExtra = new AuthenticationProperties(new Dictionary<string, string>());

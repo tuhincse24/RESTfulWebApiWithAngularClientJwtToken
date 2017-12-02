@@ -44,8 +44,6 @@ namespace RestServerApi.Providers
             context.OwinContext.Response.Headers.Add("Access-Control-Allow-Origin", new[] { "*" });
 
             //This is a Dummy check here, you need to do it to your DB
-
-
             if (context.UserName == null)
             {
                 context.SetError("invalid_username", "username is not set");

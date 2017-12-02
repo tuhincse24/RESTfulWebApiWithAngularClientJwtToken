@@ -2,6 +2,7 @@
 using RestServerApi.Entities;
 using System;
 using System.Collections.Concurrent;
+using System.Configuration;
 using System.Security.Cryptography;
 
 namespace RestServerApi.InMemoryDataStores
@@ -12,12 +13,13 @@ namespace RestServerApi.InMemoryDataStores
 
         static AudiencesStore()
         {
-            AudiencesList.TryAdd("IAmTheFirstClient",
+            var clientId = ConfigurationManager.AppSettings.Get("client.id");
+            AudiencesList.TryAdd(clientId,
                                 new Audience
                                 {
-                                    ClientId = "IAmTheFirstClient",
-                                    Base64Secret = "IxrAjDoa2FqElO7IhrSrUJELhUckePEPVpaePlS_Xaw",
-                                    Name = "http://www.RestServerApi.com.bd"
+                                    ClientId = clientId,
+                                    Base64Secret = ConfigurationManager.AppSettings.Get("secretkey"),
+                                    Name = ConfigurationManager.AppSettings.Get("issuer")
                                 });
         }
 

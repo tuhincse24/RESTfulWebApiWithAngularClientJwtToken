@@ -106,13 +106,6 @@
     <Content Include="Scripts\app\views\signup.html" />
     <Content Include="Scripts\lib\angular-local-storage.min.js" />
     <Content Include="Scripts\lib\angular-ui-bootstrap.js" />
-    <Content Include="Scripts\lib\authComplete.js" />
-    <Content Include="Scripts\lib\breeze.angular.js" />
-    <Content Include="Scripts\lib\breeze.debug.js" />
-    <Content Include="Scripts\lib\breeze.min.js" />
-    <Content Include="Scripts\lib\loading-bar.min.js" />
-    <Content Include="Scripts\lib\menuHighlighter.js" />
-    <Content Include="Scripts\lib\tweenMax.min.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
