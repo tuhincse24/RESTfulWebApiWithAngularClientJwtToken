@@ -3,17 +3,17 @@ app.factory('clientsService', ['$http', 'ngAuthSettings', function ($http, ngAut
 
     var serviceBase = ngAuthSettings.apiServiceBaseUri;
 
-    var ordersServiceFactory = {};
+    var clientsServiceFactory = {};
 
-    var _getOrders = function () {
+    var _getClients = function () {
 
         return $http.get(serviceBase + 'api/clients').then(function (results) {
             return results;
         });
     };
 
-    ordersServiceFactory.getOrders = _getOrders;
+    clientsServiceFactory.getClients = _getClients;
 
-    return ordersServiceFactory;
+    return clientsServiceFactory;
 
 }]);
