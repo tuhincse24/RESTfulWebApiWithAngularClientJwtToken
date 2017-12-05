@@ -1,9 +1,9 @@
 ﻿'use strict';
-app.controller('clientsController', ['$scope', 'clientsService', function ($scope, ordersService) {
+app.controller('clientsController', ['$scope', 'clientsService', function ($scope, clientsService) {
 
-    $scope.orders = [];
+    $scope.clients = [];
 
-    ordersService.getOrders().then(function (results) {
+    clientsService.getClients().then(function (results) {
 
         $scope.clients = results.data;
 
