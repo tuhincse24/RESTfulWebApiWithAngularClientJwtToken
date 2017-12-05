@@ -32,7 +32,7 @@ namespace RestServerApi
                 AllowInsecureHttp = true,
                 TokenEndpointPath = new PathString("/security/token"),
                 AccessTokenExpireTimeSpan = TimeSpan.FromMinutes(10),
-                Provider = new CustomOAuthServerProvider(),
+                Provider = new JwtOAuthServerProvider(),
                 AccessTokenFormat = new JsonWebTokenDataFormat()
             };
             // OAuth 2.0 Bearer Access Token Generation

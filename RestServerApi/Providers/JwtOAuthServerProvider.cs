@@ -7,13 +7,12 @@ using System.Threading.Tasks;
 
 namespace RestServerApi.Providers
 {
-    public class CustomOAuthServerProvider : OAuthAuthorizationServerProvider
+    public class JwtOAuthServerProvider : OAuthAuthorizationServerProvider
     {
         public override Task ValidateClientAuthentication(OAuthValidateClientAuthenticationContext context)
         {
             string clientId = string.Empty;
             string clientSecret = string.Empty;
-            string symmetricKeyAsBase64 = string.Empty;
 
             if (!context.TryGetBasicCredentials(out clientId, out clientSecret))
             {

@@ -132,7 +132,7 @@
     <Compile Include="InMemoryDataStores\UserStore.cs" />
     <Compile Include="InMemoryDataStores\AudiencesStore.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Providers\CustomOAuthServerProvider.cs" />
+    <Compile Include="Providers\JwtOAuthServerProvider.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup />
